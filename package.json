@@ -1,0 +1,56 @@
+{
+  "name": "notimetowaste",
+  "displayName": "No Time To Waste",
+  "description": "A gamified tasbih / tally counter for your adhkar, right inside VS Code.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.140.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "tasbih",
+    "zikr",
+    "dhikr",
+    "adhkar",
+    "islam",
+    "counter",
+    "tally"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "browser": "./dist/web/extension.js",
+  "contributes": {},
+  "scripts": {
+    "test": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. --extensionTestsPath=dist/web/test/suite/index.js",
+    "pretest": "npm run compile-web",
+    "vscode:prepublish": "npm run package-web",
+    "compile-web": "webpack",
+    "watch-web": "webpack --watch",
+    "package-web": "webpack --mode production --devtool hidden-source-map",
+    "lint": "eslint src",
+    "run-in-browser": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. ."
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.140.0",
+    "@types/mocha": "^10.0.10",
+    "@types/assert": "^1.5.11",
+    "eslint": "^10.5.0",
+    "typescript-eslint": "^8.61.1",
+    "mocha": "^11.7.6",
+    "typescript": "^6.0.3",
+    "@vscode/test-web": "^0.0.81",
+    "ts-loader": "^9.6.2",
+    "webpack": "^5.107.2",
+    "webpack-cli": "^7.0.3",
+    "@types/webpack-env": "^1.18.8",
+    "assert": "^2.1.0",
+    "process": "^0.11.10"
+  },
+  "overrides": {
+    "diff": "^8.0.4",
+    "serialize-javascript": "^7.0.6"
+  }
+}
