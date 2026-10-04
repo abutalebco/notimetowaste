@@ -32,6 +32,34 @@
 		renderLevel('s', s.sessionLevel);
 		renderLevel('g', s.globalLevel);
 		applyTheme(s.globalLevel);
+		renderBars(s);
+	}
+
+	/** @param {string} id @param {number} ratio */
+	function setBar(id, ratio) {
+		const pct = Math.max(0, Math.min(1, ratio)) * 100;
+		const el = $(id);
+		el.style.width = pct.toFixed(1) + '%';
+		/** @type {HTMLElement} */ (el.parentElement).setAttribute('aria-valuenow', String(Math.round(pct)));
+	}
+
+	/** @param {any} lvl */
+	function levelLabel(lvl) {
+		return lvl.next ? `${lvl.toNext.toLocaleString()} to ${lvl.next.badge} ${lvl.next.name}` : 'Max level 🎉';
+	}
+
+	/** @param {any} s */
+	function renderBars(s) {
+		setBar('todayBar', s.today / s.dailyGoal);
+		$('todayLabel').textContent = `${s.today.toLocaleString()} / ${s.dailyGoal.toLocaleString()}`;
+		$('todayBar').classList.toggle('done', s.today >= s.dailyGoal);
+		$('todayHint').textContent = s.hasHistory
+			? (s.today >= s.dailyGoal ? 'You beat your daily average! 🔥' : 'Goal = your daily average')
+			: 'Starter goal — it adapts to your daily average';
+		setBar('sBar', s.sessionLevel.progress);
+		$('sLabel').textContent = levelLabel(s.sessionLevel);
+		setBar('gBar', s.globalLevel.progress);
+		$('gLabel').textContent = levelLabel(s.globalLevel);
 	}
 
 	/** @param {string} p @param {any} lvl */
@@ -82,6 +110,7 @@
 		switch (msg.type) {
 			case 'state': render(msg.state); break;
 			case 'roundComplete': toast('✨ Round complete — بارك الله فيك'); break;
+			case 'dailyGoal': toast('🎯 Daily goal reached — keep going!'); break;
 			case 'levelUp':
 				toast(`${msg.badge} Level ${msg.number} · ${msg.name} ${msg.scope === 'session' ? '(session)' : '(overall)'}`);
 				break;

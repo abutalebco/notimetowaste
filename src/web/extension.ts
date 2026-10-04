@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { levelIndex, levelInfo } from './levels';
 import { SidebarProvider } from './sidebar';
+import { dailyGoal } from './stats';
 import { StatusBar } from './statusBar';
 import { Store } from './store';
 
@@ -17,9 +18,15 @@ export function activate(context: vscode.ExtensionContext) {
 		new StatusBar(store),
 		vscode.window.registerWebviewViewProvider(SidebarProvider.viewId, sidebar),
 		vscode.commands.registerCommand('notimetowaste.increment', async () => {
+			const goal = dailyGoal(store.global.daily);
+			const todayBefore = store.today;
 			const result = await store.increment();
 			if (result.roundCompleted) {
 				sidebar.post({ type: 'roundComplete' });
+			}
+			if (todayBefore < goal && store.today >= goal) {
+				sidebar.post({ type: 'dailyGoal' });
+				void vscode.window.showInformationMessage(`🎯 Daily goal of ${goal} reached — keep going!`);
 			}
 			const ups: { scope: 'session' | 'global'; before: number; after: number }[] = [
 				{ scope: 'session', before: result.prevSessionTotal, after: store.session.total },

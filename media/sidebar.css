@@ -130,6 +130,51 @@ select {
 	opacity: 0.8;
 }
 
+.progress {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.bar-label {
+	display: flex;
+	justify-content: space-between;
+	gap: 6px;
+	font-size: 11px;
+	margin-top: 6px;
+}
+
+.bar-label span:last-child {
+	opacity: 0.8;
+}
+
+.bar {
+	height: 14px;
+	border-radius: 999px;
+	background: var(--vscode-editorWidget-background, rgba(128, 128, 128, 0.2));
+	border: 1px solid var(--vscode-widget-border, rgba(128, 128, 128, 0.35));
+	overflow: hidden;
+}
+
+.fill {
+	height: 100%;
+	width: 0;
+	border-radius: 999px;
+	background: var(--primary);
+	/* glossy highlight like Duolingo bars */
+	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.35) 0 35%, transparent 35%);
+	transition: width 0.4s ease-out, background-color 0.4s;
+}
+
+.fill.done {
+	background-color: #ffc800;
+}
+
+.bar-hint {
+	font-size: 10px;
+	opacity: 0.7;
+}
+
 .toast {
 	position: fixed;
 	left: 50%;

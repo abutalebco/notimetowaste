@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { LevelInfo, levelInfo } from './levels';
+import { dailyAverage, dailyGoal } from './stats';
 import { Store } from './store';
 import { ADHKAR, getZikr } from './zikr';
 
@@ -15,6 +16,8 @@ export interface ViewState {
 	sessionTotal: number;
 	globalTotal: number;
 	today: number;
+	dailyGoal: number;
+	hasHistory: boolean;
 	sessionLevel: LevelInfo;
 	globalLevel: LevelInfo;
 }
@@ -34,6 +37,8 @@ export function buildViewState(store: Store): ViewState {
 		sessionTotal: s.total,
 		globalTotal: g.total,
 		today: store.today,
+		dailyGoal: dailyGoal(g.daily),
+		hasHistory: dailyAverage(g.daily) > 0,
 		sessionLevel: levelInfo(s.total),
 		globalLevel: levelInfo(g.total),
 	};
@@ -120,6 +125,18 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 	</button>
 
 	<button id="reset" class="link">↺ Reset round</button>
+
+	<section class="progress">
+		<div class="bar-label"><span>📅 Today</span><span id="todayLabel"></span></div>
+		<div class="bar" role="progressbar" aria-label="Today"><div id="todayBar" class="fill"></div></div>
+		<div id="todayHint" class="bar-hint"></div>
+
+		<div class="bar-label"><span>🗂️ Session level</span><span id="sLabel"></span></div>
+		<div class="bar" role="progressbar" aria-label="Session level"><div id="sBar" class="fill"></div></div>
+
+		<div class="bar-label"><span>🌍 Overall level</span><span id="gLabel"></span></div>
+		<div class="bar" role="progressbar" aria-label="Overall level"><div id="gBar" class="fill"></div></div>
+	</section>
 	<div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 	<script nonce="${nonce}" src="${js}"></script>

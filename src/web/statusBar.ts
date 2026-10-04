@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { levelInfo } from './levels';
+import { dailyGoal } from './stats';
 import { Store } from './store';
 import { getZikr } from './zikr';
 
@@ -26,7 +27,7 @@ export class StatusBar implements vscode.Disposable {
 		md.appendMarkdown(`**No Time To Waste**\n\n`);
 		md.appendMarkdown(`${lvl.badge} Overall: Level ${lvl.number} — ${lvl.name}  \n`);
 		md.appendMarkdown(`${sLvl.badge} This session: Level ${sLvl.number} — ${sLvl.name}\n\n`);
-		md.appendMarkdown(`Today: **${this.store.today.toLocaleString()}**  \n`);
+		md.appendMarkdown(`Today: **${this.store.today.toLocaleString()}** / ${dailyGoal(this.store.global.daily).toLocaleString()}  \n`);
 		md.appendMarkdown(`This session: **${this.store.session.total.toLocaleString()}**  \n`);
 		md.appendMarkdown(`All time: **${this.store.global.total.toLocaleString()}**\n\n`);
 		md.appendMarkdown(`_Click to count +1_`);
