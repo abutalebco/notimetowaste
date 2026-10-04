@@ -52,6 +52,12 @@
         "title": "Reset Round",
         "category": "No Time To Waste",
         "icon": "$(debug-restart)"
+      },
+      {
+        "command": "notimetowaste.configureShortcut",
+        "title": "Customize Count Shortcut",
+        "category": "No Time To Waste",
+        "icon": "$(keyboard)"
       }
     ],
     "menus": {
@@ -60,8 +66,70 @@
           "command": "notimetowaste.reset",
           "when": "view == notimetowaste.counter",
           "group": "navigation"
+        },
+        {
+          "command": "notimetowaste.configureShortcut",
+          "when": "view == notimetowaste.counter",
+          "group": "settings"
         }
       ]
+    },
+    "keybindings": [
+      {
+        "command": "notimetowaste.increment",
+        "key": "ctrl+alt+t",
+        "mac": "cmd+alt+t",
+        "when": "config.notimetowaste.shortcut == 'ctrl+alt+t'"
+      },
+      {
+        "command": "notimetowaste.increment",
+        "key": "ctrl+alt+z",
+        "mac": "cmd+alt+z",
+        "when": "config.notimetowaste.shortcut == 'ctrl+alt+z'"
+      },
+      {
+        "command": "notimetowaste.increment",
+        "key": "ctrl+alt+space",
+        "mac": "cmd+alt+space",
+        "when": "config.notimetowaste.shortcut == 'ctrl+alt+space'"
+      },
+      {
+        "command": "notimetowaste.increment",
+        "key": "ctrl+shift+alt+t",
+        "mac": "cmd+shift+alt+t",
+        "when": "config.notimetowaste.shortcut == 'ctrl+shift+alt+t'"
+      },
+      {
+        "command": "notimetowaste.increment",
+        "key": "alt+=",
+        "when": "config.notimetowaste.shortcut == 'alt+='"
+      }
+    ],
+    "configuration": {
+      "title": "No Time To Waste",
+      "properties": {
+        "notimetowaste.shortcut": {
+          "type": "string",
+          "default": "ctrl+alt+t",
+          "enum": [
+            "ctrl+alt+t",
+            "ctrl+alt+z",
+            "ctrl+alt+space",
+            "ctrl+shift+alt+t",
+            "alt+=",
+            "custom"
+          ],
+          "enumItemLabels": [
+            "Ctrl+Alt+T  (⌘⌥T on Mac)",
+            "Ctrl+Alt+Z  (⌘⌥Z on Mac)",
+            "Ctrl+Alt+Space  (⌘⌥Space on Mac)",
+            "Ctrl+Shift+Alt+T  (⌘⇧⌥T on Mac)",
+            "Alt+=",
+            "Custom (set in Keyboard Shortcuts)"
+          ],
+          "markdownDescription": "Keyboard shortcut that counts **+1**. Pick a preset, or choose *Custom* and assign any key in [Keyboard Shortcuts](command:notimetowaste.configureShortcut)."
+        }
+      }
     }
   },
   "scripts": {

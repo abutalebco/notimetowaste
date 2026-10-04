@@ -22,6 +22,11 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 		}),
 		vscode.commands.registerCommand('notimetowaste.reset', () => store.resetRound()),
+		vscode.commands.registerCommand('notimetowaste.configureShortcut', async () => {
+			await vscode.workspace.getConfiguration('notimetowaste')
+				.update('shortcut', 'custom', vscode.ConfigurationTarget.Global);
+			await vscode.commands.executeCommand('workbench.action.openGlobalKeybindings', 'notimetowaste.increment');
+		}),
 	);
 }
 
