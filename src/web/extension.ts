@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { levelIndex, levelInfo } from './levels';
+import { currentDailyGoal, settings } from './settings';
 import { SidebarProvider } from './sidebar';
-import { dailyGoal } from './stats';
 import { StatusBar } from './statusBar';
 import { Store } from './store';
 
@@ -18,15 +18,18 @@ export function activate(context: vscode.ExtensionContext) {
 		new StatusBar(store),
 		vscode.window.registerWebviewViewProvider(SidebarProvider.viewId, sidebar),
 		vscode.commands.registerCommand('notimetowaste.increment', async () => {
-			const goal = dailyGoal(store.global.daily);
+			const goal = currentDailyGoal(store.global.daily);
 			const todayBefore = store.today;
 			const result = await store.increment();
+			const notify = settings.notifications;
 			if (result.roundCompleted) {
 				sidebar.post({ type: 'roundComplete' });
 			}
 			if (todayBefore < goal && store.today >= goal) {
 				sidebar.post({ type: 'dailyGoal' });
-				void vscode.window.showInformationMessage(`🎯 Daily goal of ${goal} reached — keep going!`);
+				if (notify) {
+					void vscode.window.showInformationMessage(`🎯 Daily goal of ${goal} reached — keep going!`);
+				}
 			}
 			const ups: { scope: 'session' | 'global'; before: number; after: number }[] = [
 				{ scope: 'session', before: result.prevSessionTotal, after: store.session.total },
@@ -36,12 +39,16 @@ export function activate(context: vscode.ExtensionContext) {
 				if (levelIndex(after) > levelIndex(before)) {
 					const lvl = levelInfo(after);
 					sidebar.post({ type: 'levelUp', scope, badge: lvl.badge, name: lvl.name, number: lvl.number });
-					const where = scope === 'session' ? `in ${store.session.name}` : 'overall';
-					void vscode.window.showInformationMessage(`${lvl.badge} Level ${lvl.number} — ${lvl.name} ${where}! ما شاء الله`);
+					if (notify) {
+						const where = scope === 'session' ? `in ${store.session.name}` : 'overall';
+						void vscode.window.showInformationMessage(`${lvl.badge} Level ${lvl.number} — ${lvl.name} ${where}! ما شاء الله`);
+					}
 				}
 			}
 		}),
 		vscode.commands.registerCommand('notimetowaste.reset', () => store.resetRound()),
+		vscode.commands.registerCommand('notimetowaste.openSettings', () =>
+			vscode.commands.executeCommand('workbench.action.openSettings', 'notimetowaste.')),
 		vscode.commands.registerCommand('notimetowaste.configureShortcut', async () => {
 			await vscode.workspace.getConfiguration('notimetowaste')
 				.update('shortcut', 'custom', vscode.ConfigurationTarget.Global);

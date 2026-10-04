@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { LevelInfo, levelInfo } from './levels';
-import { computeStats, dailyAverage, dailyGoal, Stats } from './stats';
+import { currentDailyGoal, display, settings } from './settings';
+import { computeStats, dailyAverage, Stats } from './stats';
 import { Store } from './store';
 import { ADHKAR, getZikr } from './zikr';
 
@@ -10,6 +11,7 @@ export interface ViewState {
 	selected: string;
 	text: string;
 	subtext: string;
+	rtl: boolean;
 	round: number;
 	target: number;
 	sessionName: string;
@@ -17,6 +19,7 @@ export interface ViewState {
 	globalTotal: number;
 	today: number;
 	dailyGoal: number;
+	goalMode: 'auto' | 'fixed';
 	hasHistory: boolean;
 	sessionLevel: LevelInfo;
 	globalLevel: LevelInfo;
@@ -27,23 +30,27 @@ export function buildViewState(store: Store): ViewState {
 	const g = store.global;
 	const s = store.session;
 	const zikr = getZikr(g.selectedZikr);
+	const lang = settings.language;
+	const shown = display(zikr, lang);
 	const stats = computeStats(g.daily, g.counts, g.sessions, store.sessionId);
 	return {
-		adhkar: ADHKAR.map(z => ({ id: z.id, label: z.ar })),
+		adhkar: ADHKAR.map(z => ({ id: z.id, label: display(z, lang).label })),
 		selected: zikr.id,
-		text: zikr.ar,
-		subtext: '',
+		text: shown.text,
+		subtext: shown.subtext,
+		rtl: shown.rtl,
 		round: store.round.count,
 		target: zikr.target,
 		sessionName: s.name,
 		sessionTotal: s.total,
 		globalTotal: g.total,
 		today: store.today,
-		dailyGoal: dailyGoal(g.daily),
+		dailyGoal: currentDailyGoal(g.daily),
+		goalMode: settings.fixedDailyGoal ? 'fixed' : 'auto',
 		hasHistory: dailyAverage(g.daily) > 0,
 		sessionLevel: levelInfo(s.total),
 		globalLevel: levelInfo(g.total),
-		stats: { ...stats, topLabels: stats.topAdhkar.map(t => getZikr(t.id).ar) },
+		stats: { ...stats, topLabels: stats.topAdhkar.map(t => display(getZikr(t.id), lang).label) },
 	};
 }
 
@@ -59,6 +66,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
 	constructor(private readonly extensionUri: vscode.Uri, private readonly store: Store) {
 		store.onDidChange(() => this.refresh());
+		vscode.workspace.onDidChangeConfiguration(e => e.affectsConfiguration('notimetowaste') && this.refresh());
 	}
 
 	resolveWebviewView(view: vscode.WebviewView): void {

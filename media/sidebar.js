@@ -21,7 +21,11 @@
 			}
 		}
 		select.value = s.selected;
+		select.dir = s.rtl ? 'rtl' : 'ltr';
 		$('text').textContent = s.text;
+		$('text').dir = s.rtl ? 'rtl' : 'ltr';
+		$('text').lang = s.rtl ? 'ar' : 'en';
+		$('stTop').dir = s.rtl ? 'rtl' : 'ltr';
 		$('subtext').textContent = s.subtext;
 		$('subtext').hidden = !s.subtext;
 		$('round').textContent = String(s.round);
@@ -110,9 +114,11 @@
 		setBar('todayBar', s.today / s.dailyGoal);
 		$('todayLabel').textContent = `${s.today.toLocaleString()} / ${s.dailyGoal.toLocaleString()}`;
 		$('todayBar').classList.toggle('done', s.today >= s.dailyGoal);
-		$('todayHint').textContent = s.hasHistory
-			? (s.today >= s.dailyGoal ? 'You beat your daily average! 🔥' : 'Goal = your daily average')
-			: 'Starter goal — it adapts to your daily average';
+		$('todayHint').textContent = s.goalMode === 'fixed'
+			? (s.today >= s.dailyGoal ? 'Daily goal done! 🔥' : 'Fixed goal (from settings)')
+			: s.hasHistory
+				? (s.today >= s.dailyGoal ? 'You beat your daily average! 🔥' : 'Goal = your daily average')
+				: 'Starter goal — it adapts to your daily average';
 		setBar('sBar', s.sessionLevel.progress);
 		$('sLabel').textContent = levelLabel(s.sessionLevel);
 		setBar('gBar', s.globalLevel.progress);

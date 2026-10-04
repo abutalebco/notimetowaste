@@ -58,12 +58,23 @@
         "title": "Customize Count Shortcut",
         "category": "No Time To Waste",
         "icon": "$(keyboard)"
+      },
+      {
+        "command": "notimetowaste.openSettings",
+        "title": "Open Settings",
+        "category": "No Time To Waste",
+        "icon": "$(gear)"
       }
     ],
     "menus": {
       "view/title": [
         {
           "command": "notimetowaste.reset",
+          "when": "view == notimetowaste.counter",
+          "group": "navigation"
+        },
+        {
+          "command": "notimetowaste.openSettings",
           "when": "view == notimetowaste.counter",
           "group": "navigation"
         },
@@ -128,6 +139,39 @@
             "Custom (set in Keyboard Shortcuts)"
           ],
           "markdownDescription": "Keyboard shortcut that counts **+1**. Pick a preset, or choose *Custom* and assign any key in [Keyboard Shortcuts](command:notimetowaste.configureShortcut)."
+        },
+        "notimetowaste.language": {
+          "type": "string",
+          "default": "arabic",
+          "enum": [
+            "arabic",
+            "arabic-transliteration",
+            "arabic-english",
+            "english"
+          ],
+          "enumItemLabels": [
+            "العربية فقط (Arabic only)",
+            "Arabic + transliteration",
+            "Arabic + English meaning",
+            "Transliteration + English meaning (no Arabic)"
+          ],
+          "markdownDescription": "How adhkar are displayed in the dropdown, sidebar and status bar. Default is Arabic only."
+        },
+        "notimetowaste.dailyGoal": {
+          "type": "integer",
+          "default": 0,
+          "minimum": 0,
+          "markdownDescription": "Daily goal for the **Today** progress bar. `0` = automatic: your own daily average (starts at 100 until there is history)."
+        },
+        "notimetowaste.showStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the tasbih counter in the status bar."
+        },
+        "notimetowaste.notifications": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show VS Code notifications for level-ups and reaching the daily goal (the sidebar always celebrates)."
         }
       }
     }
