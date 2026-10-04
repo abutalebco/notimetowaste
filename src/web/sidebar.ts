@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { LevelInfo, levelInfo } from './levels';
-import { dailyAverage, dailyGoal } from './stats';
+import { computeStats, dailyAverage, dailyGoal, Stats } from './stats';
 import { Store } from './store';
 import { ADHKAR, getZikr } from './zikr';
 
@@ -20,12 +20,14 @@ export interface ViewState {
 	hasHistory: boolean;
 	sessionLevel: LevelInfo;
 	globalLevel: LevelInfo;
+	stats: Stats & { topLabels: string[] };
 }
 
 export function buildViewState(store: Store): ViewState {
 	const g = store.global;
 	const s = store.session;
 	const zikr = getZikr(g.selectedZikr);
+	const stats = computeStats(g.daily, g.counts, g.sessions, store.sessionId);
 	return {
 		adhkar: ADHKAR.map(z => ({ id: z.id, label: z.ar })),
 		selected: zikr.id,
@@ -41,6 +43,7 @@ export function buildViewState(store: Store): ViewState {
 		hasHistory: dailyAverage(g.daily) > 0,
 		sessionLevel: levelInfo(s.total),
 		globalLevel: levelInfo(g.total),
+		stats: { ...stats, topLabels: stats.topAdhkar.map(t => getZikr(t.id).ar) },
 	};
 }
 
@@ -137,6 +140,23 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 		<div class="bar-label"><span>🌍 Overall level</span><span id="gLabel"></span></div>
 		<div class="bar" role="progressbar" aria-label="Overall level"><div id="gBar" class="fill"></div></div>
 	</section>
+
+	<details class="stats" id="stats">
+		<summary>📊 Statistics</summary>
+		<div class="tiles">
+			<div class="tile"><b id="stStreak">0</b><span>🔥 Day streak</span></div>
+			<div class="tile"><b id="stBest">0</b><span>🏆 Best streak</span></div>
+			<div class="tile"><b id="stAvg">0</b><span>📈 Daily average</span></div>
+			<div class="tile"><b id="stDays">0</b><span>📆 Active days</span></div>
+		</div>
+		<div id="stBestDay" class="stat-line"></div>
+		<h4>Last 7 days</h4>
+		<div id="chart" class="chart"></div>
+		<h4>Most recited</h4>
+		<ol id="stTop" class="stat-list" dir="rtl"></ol>
+		<h4>Top sessions</h4>
+		<ol id="stSessions" class="stat-list"></ol>
+	</details>
 	<div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 	<script nonce="${nonce}" src="${js}"></script>

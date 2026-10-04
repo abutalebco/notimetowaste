@@ -33,7 +33,64 @@
 		renderLevel('g', s.globalLevel);
 		applyTheme(s.globalLevel);
 		renderBars(s);
+		renderStats(s.stats);
 	}
+
+	/** @param {HTMLElement} el @param {string[]} items */
+	function fillList(el, items) {
+		el.innerHTML = '';
+		for (const text of items) {
+			const li = document.createElement('li');
+			li.textContent = text;
+			el.appendChild(li);
+		}
+		if (!items.length) {
+			const li = document.createElement('li');
+			li.className = 'empty';
+			li.textContent = '—';
+			el.appendChild(li);
+		}
+	}
+
+	/** @param {any} st */
+	function renderStats(st) {
+		$('stStreak').textContent = String(st.currentStreak);
+		$('stBest').textContent = String(st.bestStreak);
+		$('stAvg').textContent = Math.round(st.average).toLocaleString();
+		$('stDays').textContent = String(st.activeDays);
+		$('stBestDay').textContent = st.bestDay
+			? `⭐ Best day: ${st.bestDay.count.toLocaleString()} on ${st.bestDay.date}`
+			: '';
+
+		const chart = $('chart');
+		chart.innerHTML = '';
+		const max = Math.max(1, ...st.last7.map((/** @type {any} */ d) => d.count));
+		for (const d of st.last7) {
+			const col = document.createElement('div');
+			col.className = 'col' + (d.isToday ? ' today' : '');
+			col.title = `${d.label}: ${d.count}`;
+			const val = document.createElement('span');
+			val.className = 'val';
+			val.textContent = d.count ? String(d.count) : '';
+			const bar = document.createElement('div');
+			bar.className = 'colbar';
+			bar.style.height = Math.max(2, (d.count / max) * 60) + 'px';
+			const lab = document.createElement('span');
+			lab.className = 'lab';
+			lab.textContent = d.label;
+			col.append(val, bar, lab);
+			chart.appendChild(col);
+		}
+
+		fillList($('stTop'), st.topAdhkar.map((/** @type {any} */ t, /** @type {number} */ i) =>
+			`${st.topLabels[i]} — ${t.count.toLocaleString()}`));
+		fillList($('stSessions'), st.sessions.map((/** @type {any} */ x) =>
+			`${x.current ? '👉 ' : ''}${x.name} — ${x.total.toLocaleString()}`));
+	}
+
+	const stats = /** @type {HTMLDetailsElement} */ ($('stats'));
+	stats.open = !!(vscode.getState() || {}).statsOpen;
+	stats.addEventListener('toggle', () => vscode.setState({ ...(vscode.getState() || {}), statsOpen: stats.open }));
 
 	/** @param {string} id @param {number} ratio */
 	function setBar(id, ratio) {

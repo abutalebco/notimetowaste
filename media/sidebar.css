@@ -175,6 +175,102 @@ select {
 	opacity: 0.7;
 }
 
+.stats summary {
+	cursor: pointer;
+	font-weight: 700;
+	font-size: 13px;
+	padding: 4px 0;
+}
+
+.stats h4 {
+	margin: 12px 0 4px;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	opacity: 0.75;
+}
+
+.tiles {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 6px;
+	margin-top: 6px;
+}
+
+.tile {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 6px;
+	border-radius: 10px;
+	border: 2px solid var(--vscode-widget-border, rgba(128, 128, 128, 0.35));
+	border-bottom-width: 4px;
+}
+
+.tile b {
+	font-size: 20px;
+	color: var(--primary);
+}
+
+.tile span {
+	font-size: 10px;
+	opacity: 0.8;
+}
+
+.stat-line {
+	font-size: 11px;
+	margin-top: 6px;
+	opacity: 0.85;
+}
+
+.chart {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 4px;
+	height: 92px;
+}
+
+.col {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 2px;
+}
+
+.colbar {
+	width: 100%;
+	max-width: 22px;
+	border-radius: 4px 4px 0 0;
+	background: var(--primary);
+	opacity: 0.55;
+	transition: height 0.4s;
+}
+
+.col.today .colbar {
+	opacity: 1;
+}
+
+.col .val,
+.col .lab {
+	font-size: 9px;
+	opacity: 0.8;
+}
+
+.stat-list {
+	margin: 0;
+	padding-inline-start: 20px;
+	font-size: 12px;
+	line-height: 1.7;
+}
+
+.stat-list .empty {
+	list-style: none;
+	opacity: 0.6;
+}
+
 .toast {
 	position: fixed;
 	left: 50%;

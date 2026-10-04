@@ -29,3 +29,82 @@ export function dailyGoal(daily: Record<string, number>): number {
 	const avg = dailyAverage(daily);
 	return avg > 0 ? Math.max(33, Math.round(avg)) : DEFAULT_DAILY_GOAL;
 }
+
+export interface Stats {
+	average: number;
+	activeDays: number;
+	currentStreak: number;
+	bestStreak: number;
+	bestDay: { date: string; count: number } | undefined;
+	last7: { label: string; count: number; isToday: boolean }[];
+	topAdhkar: { id: string; count: number }[];
+	sessions: { name: string; total: number; current: boolean }[];
+}
+
+function addDays(d: Date, n: number): Date {
+	const x = new Date(d);
+	x.setDate(x.getDate() + n);
+	return x;
+}
+
+export function computeStats(
+	daily: Record<string, number>,
+	counts: Record<string, number>,
+	sessions: Record<string, { name: string; total: number }>,
+	currentSessionId: string,
+	now = new Date(),
+): Stats {
+	const active = Object.keys(daily).filter(d => daily[d] > 0).sort();
+
+	// Current streak: consecutive active days ending today (or yesterday if today is still empty).
+	let currentStreak = 0;
+	let cursor = daily[todayKey(now)] ? now : addDays(now, -1);
+	while (daily[todayKey(cursor)]) {
+		currentStreak++;
+		cursor = addDays(cursor, -1);
+	}
+
+	let bestStreak = 0;
+	let run = 0;
+	let prev: string | undefined;
+	for (const d of active) {
+		run = prev && dayDiff(prev, d) === 1 ? run + 1 : 1;
+		bestStreak = Math.max(bestStreak, run);
+		prev = d;
+	}
+
+	let bestDay: Stats['bestDay'];
+	for (const d of active) {
+		if (!bestDay || daily[d] > bestDay.count) {
+			bestDay = { date: d, count: daily[d] };
+		}
+	}
+
+	const last7: Stats['last7'] = [];
+	for (let i = 6; i >= 0; i--) {
+		const day = addDays(now, -i);
+		last7.push({
+			label: day.toLocaleDateString(undefined, { weekday: 'short' }),
+			count: daily[todayKey(day)] ?? 0,
+			isToday: i === 0,
+		});
+	}
+
+	return {
+		average: dailyAverage(daily),
+		activeDays: active.length,
+		currentStreak,
+		bestStreak,
+		bestDay,
+		last7,
+		topAdhkar: Object.entries(counts)
+			.sort((a, b) => b[1] - a[1])
+			.slice(0, 3)
+			.map(([id, count]) => ({ id, count })),
+		sessions: Object.entries(sessions)
+			.filter(([, s]) => s.total > 0)
+			.sort((a, b) => b[1].total - a[1].total)
+			.slice(0, 5)
+			.map(([id, s]) => ({ name: s.name, total: s.total, current: id === currentSessionId })),
+	};
+}
