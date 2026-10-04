@@ -1,65 +1,63 @@
-# notimetowaste README
+# No Time To Waste 📿
 
-This is the README for your extension "notimetowaste". After writing up a brief description, we recommend including the following sections.
+A gamified **tasbih / tally counter** for your adhkar, right inside VS Code.
+Make every build, test run and code review count.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- **Sidebar tasbih**: pick a zikr from the dropdown (22 common adhkar) and tap the big button.
+- **Status bar counter**: shows the selected zikr and the current round (e.g. `🌱 سُبْحَانَ اللَّهِ  12/33`). Click it to count without opening the sidebar.
+- **Keyboard shortcut**: `Ctrl+Alt+T` (`Cmd+Alt+T` on Mac) by default. Choose another preset in Settings, or pick *Custom* and assign any key.
+- **Sessions**: each VS Code workspace/project is its own session with its own level. Everything also adds up to an **overall** level.
+- **Duolingo-style levels**: 10 levels, each with its own badge and colour theme. The whole panel recolours as you level up.
 
-For example if there is an image subfolder under your extension project workspace:
+  | Lv | Badge | Name | From |
+  |---|---|---|---|
+  | 1 | 🌱 | Seed | 0 |
+  | 2 | 🌿 | Sprout | 33 |
+  | 3 | 🌸 | Blossom | 100 |
+  | 4 | 🔥 | Flame | 333 |
+  | 5 | ⭐ | Star | 1,000 |
+  | 6 | 🌙 | Moon | 3,333 |
+  | 7 | 💎 | Diamond | 10,000 |
+  | 8 | 🏮 | Lantern | 33,333 |
+  | 9 | 👑 | Crown | 100,000 |
+  | 10 | 🕌 | Legend | 333,333 |
 
-\!\[feature X\]\(images/feature-x.png\)
+- **Progress bars**
+  - 📅 **Today**: today's count against your goal. By default the goal is *your own daily average*, so you compete with yourself.
+  - 🗂️ **Session level** and 🌍 **Overall level**: how far you are from the next badge.
+- **Statistics**: day streak, best streak, daily average, active days, best day, a last-7-days chart, your most recited adhkar and your top sessions.
+- **Celebrations**: toasts and notifications when you complete a round, reach the daily goal or level up.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Settings
 
-## Requirements
+| Setting | Default | Description |
+|---|---|---|
+| `notimetowaste.shortcut` | `ctrl+alt+t` | Shortcut preset for **Count (+1)**, or `custom`. |
+| `notimetowaste.language` | `arabic` | `arabic`, `arabic-transliteration`, `arabic-english` or `english` (transliteration and meaning). |
+| `notimetowaste.dailyGoal` | `0` | `0` = automatic (your daily average); any other number = a fixed goal. |
+| `notimetowaste.showStatusBar` | `true` | Show the status bar counter. |
+| `notimetowaste.notifications` | `true` | VS Code pop-ups for level-ups and daily goal. |
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Commands
 
-## Extension Settings
+- `No Time To Waste: Count (+1)`
+- `No Time To Waste: Reset Round` (resets only the current round; your totals are never lost)
+- `No Time To Waste: Customize Count Shortcut`
+- `No Time To Waste: Open Settings`
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+## Privacy
 
-For example:
+All data stays on your machine in VS Code's extension storage. Nothing is sent anywhere.
 
-This extension contributes the following settings:
+## Development
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+```bash
+npm install
+npm run compile-web     # build
+npm run watch-web       # rebuild on change
+npm test                # unit tests in the web extension host
+```
 
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Press `F5` to launch an Extension Development Host.

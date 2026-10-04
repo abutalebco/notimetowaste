@@ -1,9 +1,7 @@
 # Change Log
 
-All notable changes to the "notimetowaste" extension will be documented in this file.
+## 0.0.1
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
-
-- Initial release
+- Initial release: sidebar tasbih with 22 adhkar, status bar counter, configurable shortcut,
+  per-workspace sessions plus overall progress, Duolingo-style levels with themes and badges,
+  daily and level progress bars, statistics, and language/goal/notification settings.
