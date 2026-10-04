@@ -22,7 +22,48 @@
     "onStartupFinished"
   ],
   "browser": "./dist/web/extension.js",
-  "contributes": {},
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "notimetowaste",
+          "title": "No Time To Waste",
+          "icon": "media/tasbih.svg"
+        }
+      ]
+    },
+    "views": {
+      "notimetowaste": [
+        {
+          "type": "webview",
+          "id": "notimetowaste.counter",
+          "name": "Tasbih"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "notimetowaste.increment",
+        "title": "Count (+1)",
+        "category": "No Time To Waste"
+      },
+      {
+        "command": "notimetowaste.reset",
+        "title": "Reset Round",
+        "category": "No Time To Waste",
+        "icon": "$(debug-restart)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "notimetowaste.reset",
+          "when": "view == notimetowaste.counter",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
   "scripts": {
     "test": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. --extensionTestsPath=dist/web/test/suite/index.js",
     "pretest": "npm run compile-web",

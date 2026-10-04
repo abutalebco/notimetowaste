@@ -1,0 +1,108 @@
+:root {
+	--primary: #58cc02;
+	--primary-dark: #46a302;
+	--accent: #ffffff;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 12px;
+	padding: 12px;
+	font-family: var(--vscode-font-family);
+	color: var(--vscode-foreground);
+}
+
+select {
+	width: 100%;
+	padding: 6px;
+	font-size: 14px;
+	direction: rtl;
+	color: var(--vscode-dropdown-foreground);
+	background: var(--vscode-dropdown-background);
+	border: 1px solid var(--vscode-dropdown-border);
+	border-radius: 6px;
+}
+
+.zikr-text {
+	text-align: center;
+	font-size: 22px;
+	line-height: 1.8;
+	font-weight: 600;
+}
+
+.zikr-subtext {
+	text-align: center;
+	font-size: 12px;
+	opacity: 0.8;
+}
+
+.tap {
+	align-self: center;
+	width: 180px;
+	height: 180px;
+	border-radius: 50%;
+	border: none;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: var(--accent);
+	background: var(--primary);
+	/* Duolingo-style chunky 3D button */
+	box-shadow: 0 8px 0 var(--primary-dark);
+	transition: transform 0.08s, box-shadow 0.08s, background 0.4s;
+	user-select: none;
+}
+
+.tap:active {
+	transform: translateY(6px);
+	box-shadow: 0 2px 0 var(--primary-dark);
+}
+
+.tap:focus-visible {
+	outline: 3px solid var(--vscode-focusBorder);
+	outline-offset: 6px;
+}
+
+.tap-count {
+	font-size: 54px;
+	font-weight: 800;
+	line-height: 1;
+}
+
+.tap-target {
+	font-size: 14px;
+	opacity: 0.85;
+}
+
+.pulse {
+	animation: pulse 0.25s ease-out;
+}
+
+@keyframes pulse {
+	50% { filter: brightness(1.15); }
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+	gap: 8px;
+	font-size: 12px;
+	flex-wrap: wrap;
+}
+
+.link {
+	align-self: center;
+	background: none;
+	border: none;
+	color: var(--vscode-textLink-foreground);
+	cursor: pointer;
+	font-size: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* { animation: none !important; transition: none !important; }
+}

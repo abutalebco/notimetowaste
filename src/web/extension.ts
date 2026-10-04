@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { SidebarProvider } from './sidebar';
 import { Store } from './store';
 
 /**
@@ -7,7 +8,19 @@ import { Store } from './store';
  */
 export function activate(context: vscode.ExtensionContext) {
 	const store = new Store(context);
-	context.subscriptions.push(store);
+	const sidebar = new SidebarProvider(context.extensionUri, store);
+
+	context.subscriptions.push(
+		store,
+		vscode.window.registerWebviewViewProvider(SidebarProvider.viewId, sidebar),
+		vscode.commands.registerCommand('notimetowaste.increment', async () => {
+			const result = await store.increment();
+			if (result.roundCompleted) {
+				sidebar.post({ type: 'roundComplete' });
+			}
+		}),
+		vscode.commands.registerCommand('notimetowaste.reset', () => store.resetRound()),
+	);
 }
 
 export function deactivate() {}
