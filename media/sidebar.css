@@ -86,12 +86,82 @@ select {
 	50% { filter: brightness(1.15); }
 }
 
-.row {
-	display: flex;
-	justify-content: space-between;
+.levels {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
 	gap: 8px;
-	font-size: 12px;
-	flex-wrap: wrap;
+}
+
+.level-card {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px;
+	border-radius: 12px;
+	border: 2px solid var(--primary);
+	border-bottom-width: 4px;
+	transition: border-color 0.4s;
+}
+
+.badge {
+	font-size: 28px;
+	line-height: 1;
+}
+
+.level-scope {
+	font-size: 10px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	opacity: 0.75;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 110px;
+}
+
+.level-name {
+	font-weight: 700;
+	font-size: 13px;
+	color: var(--primary);
+}
+
+.level-count {
+	font-size: 11px;
+	opacity: 0.8;
+}
+
+.toast {
+	position: fixed;
+	left: 50%;
+	bottom: 16px;
+	transform: translate(-50%, 40px);
+	opacity: 0;
+	padding: 8px 14px;
+	border-radius: 999px;
+	font-weight: 700;
+	font-size: 13px;
+	color: var(--accent);
+	background: var(--primary);
+	box-shadow: 0 4px 0 var(--primary-dark);
+	transition: transform 0.25s, opacity 0.25s;
+	pointer-events: none;
+	white-space: nowrap;
+}
+
+.toast.show {
+	transform: translate(-50%, 0);
+	opacity: 1;
+}
+
+.level-up .tap {
+	animation: levelUp 0.9s ease-out;
+}
+
+@keyframes levelUp {
+	0% { transform: scale(1); }
+	30% { transform: scale(1.15) rotate(-6deg); }
+	60% { transform: scale(0.95) rotate(4deg); }
+	100% { transform: scale(1); }
 }
 
 .link {

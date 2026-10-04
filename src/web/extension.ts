@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { levelIndex, levelInfo } from './levels';
 import { SidebarProvider } from './sidebar';
 import { StatusBar } from './statusBar';
 import { Store } from './store';
@@ -19,6 +20,18 @@ export function activate(context: vscode.ExtensionContext) {
 			const result = await store.increment();
 			if (result.roundCompleted) {
 				sidebar.post({ type: 'roundComplete' });
+			}
+			const ups: { scope: 'session' | 'global'; before: number; after: number }[] = [
+				{ scope: 'session', before: result.prevSessionTotal, after: store.session.total },
+				{ scope: 'global', before: result.prevGlobalTotal, after: store.global.total },
+			];
+			for (const { scope, before, after } of ups) {
+				if (levelIndex(after) > levelIndex(before)) {
+					const lvl = levelInfo(after);
+					sidebar.post({ type: 'levelUp', scope, badge: lvl.badge, name: lvl.name, number: lvl.number });
+					const where = scope === 'session' ? `in ${store.session.name}` : 'overall';
+					void vscode.window.showInformationMessage(`${lvl.badge} Level ${lvl.number} — ${lvl.name} ${where}! ما شاء الله`);
+				}
 			}
 		}),
 		vscode.commands.registerCommand('notimetowaste.reset', () => store.resetRound()),

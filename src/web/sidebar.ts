@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { LevelInfo, levelInfo } from './levels';
 import { Store } from './store';
 import { ADHKAR, getZikr } from './zikr';
 
@@ -14,6 +15,8 @@ export interface ViewState {
 	sessionTotal: number;
 	globalTotal: number;
 	today: number;
+	sessionLevel: LevelInfo;
+	globalLevel: LevelInfo;
 }
 
 export function buildViewState(store: Store): ViewState {
@@ -31,6 +34,8 @@ export function buildViewState(store: Store): ViewState {
 		sessionTotal: s.total,
 		globalTotal: g.total,
 		today: store.today,
+		sessionLevel: levelInfo(s.total),
+		globalLevel: levelInfo(g.total),
 	};
 }
 
@@ -86,6 +91,25 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 <link rel="stylesheet" href="${css}">
 </head>
 <body>
+	<div class="levels">
+		<div class="level-card" title="Level of this workspace">
+			<span id="sBadge" class="badge">🌱</span>
+			<div>
+				<div class="level-scope">Session · <span id="sessionName"></span></div>
+				<div class="level-name">Lv <span id="sNum">1</span> · <span id="sName"></span></div>
+				<div class="level-count"><span id="sessionTotal">0</span> adhkar</div>
+			</div>
+		</div>
+		<div class="level-card" title="Level across all workspaces">
+			<span id="gBadge" class="badge">🌱</span>
+			<div>
+				<div class="level-scope">Overall</div>
+				<div class="level-name">Lv <span id="gNum">1</span> · <span id="gName"></span></div>
+				<div class="level-count"><span id="globalTotal">0</span> adhkar</div>
+			</div>
+		</div>
+	</div>
+
 	<select id="zikr" aria-label="Choose zikr"></select>
 	<div id="text" class="zikr-text" dir="rtl" lang="ar"></div>
 	<div id="subtext" class="zikr-subtext"></div>
@@ -95,11 +119,8 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 		<span id="target" class="tap-target">/ 33</span>
 	</button>
 
-	<div class="row">
-		<span>Session · <b id="sessionName"></b>: <b id="sessionTotal">0</b></span>
-		<span>All: <b id="globalTotal">0</b></span>
-	</div>
 	<button id="reset" class="link">↺ Reset round</button>
+	<div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 	<script nonce="${nonce}" src="${js}"></script>
 </body>
