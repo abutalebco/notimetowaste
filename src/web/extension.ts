@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { SidebarProvider } from './sidebar';
+import { StatusBar } from './statusBar';
 import { Store } from './store';
 
 /**
@@ -12,6 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(
 		store,
+		new StatusBar(store),
 		vscode.window.registerWebviewViewProvider(SidebarProvider.viewId, sidebar),
 		vscode.commands.registerCommand('notimetowaste.increment', async () => {
 			const result = await store.increment();
