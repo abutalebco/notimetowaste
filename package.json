@@ -1,6 +1,6 @@
 {
   "name": "NoTimeToWaste",
-  "displayName": "No Time To Waste",
+  "displayName": "NoTimeToWaste",
   "icon": "public/images/logo.png",
   "description": "A gamified tasbih / tally counter for your adhkar, right inside VS Code.",
   "publisher": "abutalebco",
@@ -33,7 +33,7 @@
       "activitybar": [
         {
           "id": "notimetowaste",
-          "title": "No Time To Waste",
+          "title": "NoTimeToWaste",
           "icon": "public/images/seen-letter-white.png"
         }
       ]
@@ -51,24 +51,24 @@
       {
         "command": "notimetowaste.increment",
         "title": "Count (+1)",
-        "category": "No Time To Waste"
+        "category": "NoTimeToWaste"
       },
       {
         "command": "notimetowaste.reset",
         "title": "Reset Round",
-        "category": "No Time To Waste",
+        "category": "NoTimeToWaste",
         "icon": "$(debug-restart)"
       },
       {
         "command": "notimetowaste.configureShortcut",
         "title": "Customize Count Shortcut",
-        "category": "No Time To Waste",
+        "category": "NoTimeToWaste",
         "icon": "$(keyboard)"
       },
       {
         "command": "notimetowaste.openSettings",
         "title": "Open Settings",
-        "category": "No Time To Waste",
+        "category": "NoTimeToWaste",
         "icon": "$(gear)"
       }
     ],
@@ -123,7 +123,7 @@
       }
     ],
     "configuration": {
-      "title": "No Time To Waste",
+      "title": "NoTimeToWaste",
       "properties": {
         "notimetowaste.shortcut": {
           "type": "string",

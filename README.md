@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="public/images/logo.png" alt="No Time To Waste Logo" width="150" />
+  <img src="public/images/logo.png" alt="NoTimeToWaste Logo" width="150" />
 </p>
 
-<h1 align="center">No Time To Waste 📿</h1>
+<h1 align="center">NoTimeToWaste 📿</h1>
 
 <p align="center">
   <a href="https://github.com/abutalebco/notimetowaste/releases">
@@ -61,10 +61,10 @@ Make every build, test run and code review count.
 
 ## Commands
 
-- `No Time To Waste: Count (+1)`
-- `No Time To Waste: Reset Round` (resets only the current round; your totals are never lost)
-- `No Time To Waste: Customize Count Shortcut`
-- `No Time To Waste: Open Settings`
+- `NoTimeToWaste: Count (+1)`
+- `NoTimeToWaste: Reset Round` (resets only the current round; your totals are never lost)
+- `NoTimeToWaste: Customize Count Shortcut`
+- `NoTimeToWaste: Open Settings`
 
 ## Privacy
 
