@@ -2,10 +2,10 @@
   "name": "notimetowaste",
   "displayName": "No Time To Waste",
   "description": "A gamified tasbih / tally counter for your adhkar, right inside VS Code.",
-  "publisher": "YOUR_PUBLISHER_NAME",
+  "publisher": "abutalebco",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/notimetowaste.git"
+    "url": "https://github.com/abutalebco/notimetowaste.git"
   },
   "version": "0.0.1",
   "engines": {
