@@ -18,6 +18,7 @@
     <img src="https://img.shields.io/github/license/abutalebco/notimetowaste?style=flat-square" alt="License" />
   </a>
 </p>
+
 A gamified **tasbih / tally counter** for your adhkar, right inside VS Code.
 Make every build, test run and code review count.
 
