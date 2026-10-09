@@ -27,7 +27,14 @@ jobs:
         run: vsce package
 
       - name: Publish to VS Code Marketplace
-        run: vsce publish -p ${{ secrets.VSCE_PAT }}
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        run: |
+          if [ -z "$VSCE_PAT" ]; then
+            echo "VSCE_PAT secret is not configured"
+            exit 1
+          fi
+          vsce publish -p "$VSCE_PAT"
 
       - name: Upload VSIX to GitHub Release
         uses: softprops/action-gh-release@v2
