@@ -12,7 +12,7 @@ export class StatusBar implements vscode.Disposable {
 	private readonly configListener: vscode.Disposable;
 
 	constructor(private readonly store: Store) {
-		this.item.name = 'No Time To Waste';
+		this.item.name = 'NoTimeToWaste';
 		this.item.command = 'notimetowaste.increment';
 		store.onDidChange(() => this.update());
 		this.configListener = vscode.workspace.onDidChangeConfiguration(e => {
@@ -37,7 +37,7 @@ export class StatusBar implements vscode.Disposable {
 		this.item.text = `${lvl.badge} ${short}  ${round}/${zikr.target}`;
 
 		const md = new vscode.MarkdownString();
-		md.appendMarkdown(`**No Time To Waste**\n\n`);
+		md.appendMarkdown(`**NoTimeToWaste**\n\n`);
 		md.appendMarkdown(`${lvl.badge} Overall: Level ${lvl.number} — ${lvl.name}  \n`);
 		md.appendMarkdown(`${sLvl.badge} This session: Level ${sLvl.number} — ${sLvl.name}\n\n`);
 		md.appendMarkdown(`Today: **${this.store.today.toLocaleString()}** / ${currentDailyGoal(this.store.global.daily).toLocaleString()}  \n`);

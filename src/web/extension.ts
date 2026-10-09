@@ -6,7 +6,7 @@ import { StatusBar } from './statusBar';
 import { Store } from './store';
 
 /**
- * Entry point for "No Time To Waste".
+ * Entry point for "NoTimeToWaste".
  * Features are wired up here as they are added.
  */
 export function activate(context: vscode.ExtensionContext) {
