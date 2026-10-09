@@ -1,6 +1,7 @@
 {
   "name": "notimetowaste",
   "displayName": "No Time To Waste",
+  "icon": "public/images/logo.png",
   "description": "A gamified tasbih / tally counter for your adhkar, right inside VS Code.",
   "publisher": "abutalebco",
   "repository": {
@@ -33,7 +34,7 @@
         {
           "id": "notimetowaste",
           "title": "No Time To Waste",
-          "icon": "media/tasbih.svg"
+          "icon": "public/images/seen-letter-white.png"
         }
       ]
     },
