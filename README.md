@@ -5,17 +5,17 @@
 <h1 align="center">No Time To Waste 📿</h1>
 
 <p align="center">
-  <a href="https://github.com/YOUR_USERNAME/notimetowaste/releases">
-    <img src="https://img.shields.io/github/v/release/YOUR_USERNAME/notimetowaste?style=flat-square" alt="GitHub Release" />
+  <a href="https://github.com/abutalebco/notimetowaste/releases">
+    <img src="https://img.shields.io/github/v/release/abutalebco/notimetowaste?style=flat-square" alt="GitHub Release" />
   </a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=YOUR_PUBLISHER_NAME.notimetowaste">
-    <img src="https://img.shields.io/visual-studio-marketplace/v/YOUR_PUBLISHER_NAME.notimetowaste?style=flat-square" alt="Visual Studio Marketplace Version" />
+  <a href="https://marketplace.visualstudio.com/items?itemName=abutalebco.notimetowaste">
+    <img src="https://img.shields.io/visual-studio-marketplace/v/abutalebco.notimetowaste?style=flat-square" alt="Visual Studio Marketplace Version" />
   </a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=YOUR_PUBLISHER_NAME.notimetowaste">
-    <img src="https://img.shields.io/visual-studio-marketplace/i/YOUR_PUBLISHER_NAME.notimetowaste?style=flat-square" alt="Visual Studio Marketplace Installs" />
+  <a href="https://marketplace.visualstudio.com/items?itemName=abutalebco.notimetowaste">
+    <img src="https://img.shields.io/visual-studio-marketplace/i/abutalebco.notimetowaste?style=flat-square" alt="Visual Studio Marketplace Installs" />
   </a>
-  <a href="https://github.com/YOUR_USERNAME/notimetowaste/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/YOUR_USERNAME/notimetowaste?style=flat-square" alt="License" />
+  <a href="https://github.com/abutalebco/notimetowaste/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/abutalebco/notimetowaste?style=flat-square" alt="License" />
   </a>
 </p>
 A gamified **tasbih / tally counter** for your adhkar, right inside VS Code.
