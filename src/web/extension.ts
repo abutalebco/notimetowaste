@@ -6,7 +6,7 @@ import { StatusBar } from './statusBar';
 import { Store } from './store';
 
 /**
- * Entry point for "No Time To Waste".
+ * Entry point for "Sabha".
  * Features are wired up here as they are added.
  */
 export function activate(context: vscode.ExtensionContext) {
@@ -17,7 +17,7 @@ export function activate(context: vscode.ExtensionContext) {
 		store,
 		new StatusBar(store),
 		vscode.window.registerWebviewViewProvider(SidebarProvider.viewId, sidebar),
-		vscode.commands.registerCommand('notimetowaste.increment', async () => {
+		vscode.commands.registerCommand('Sabha.increment', async () => {
 			const goal = currentDailyGoal(store.global.daily);
 			const todayBefore = store.today;
 			const result = await store.increment();
@@ -46,13 +46,13 @@ export function activate(context: vscode.ExtensionContext) {
 				}
 			}
 		}),
-		vscode.commands.registerCommand('notimetowaste.reset', () => store.resetRound()),
-		vscode.commands.registerCommand('notimetowaste.openSettings', () =>
-			vscode.commands.executeCommand('workbench.action.openSettings', 'notimetowaste.')),
-		vscode.commands.registerCommand('notimetowaste.configureShortcut', async () => {
-			await vscode.workspace.getConfiguration('notimetowaste')
+		vscode.commands.registerCommand('Sabha.reset', () => store.resetRound()),
+		vscode.commands.registerCommand('Sabha.openSettings', () =>
+			vscode.commands.executeCommand('workbench.action.openSettings', 'Sabha.')),
+		vscode.commands.registerCommand('Sabha.configureShortcut', async () => {
+			await vscode.workspace.getConfiguration('Sabha')
 				.update('shortcut', 'custom', vscode.ConfigurationTarget.Global);
-			await vscode.commands.executeCommand('workbench.action.openGlobalKeybindings', 'notimetowaste.increment');
+			await vscode.commands.executeCommand('workbench.action.openGlobalKeybindings', 'Sabha.increment');
 		}),
 	);
 }
