@@ -1,21 +1,21 @@
 <p align="center">
-  <img src="public/images/logo.png" alt="No Time To Waste Logo" width="150" />
+  <img src="public/images/logo.png" alt="Sabha Logo" width="150" />
 </p>
 
-<h1 align="center">No Time To Waste 📿</h1>
+<h1 align="center">Sabha 📿</h1>
 
 <p align="center">
-  <a href="https://github.com/abutalebco/notimetowaste/releases">
-    <img src="https://img.shields.io/github/v/release/abutalebco/notimetowaste?style=flat-square" alt="GitHub Release" />
+  <a href="https://github.com/abutalebco/Sabha/releases">
+    <img src="https://img.shields.io/github/v/release/abutalebco/Sabha?style=flat-square" alt="GitHub Release" />
   </a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=abutalebco.notimetowaste">
-    <img src="https://img.shields.io/visual-studio-marketplace/v/abutalebco.notimetowaste?style=flat-square" alt="Visual Studio Marketplace Version" />
+  <a href="https://marketplace.visualstudio.com/items?itemName=abutalebco.Sabha">
+    <img src="https://img.shields.io/visual-studio-marketplace/v/abutalebco.Sabha?style=flat-square" alt="Visual Studio Marketplace Version" />
   </a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=abutalebco.notimetowaste">
-    <img src="https://img.shields.io/visual-studio-marketplace/i/abutalebco.notimetowaste?style=flat-square" alt="Visual Studio Marketplace Installs" />
+  <a href="https://marketplace.visualstudio.com/items?itemName=abutalebco.Sabha">
+    <img src="https://img.shields.io/visual-studio-marketplace/i/abutalebco.Sabha?style=flat-square" alt="Visual Studio Marketplace Installs" />
   </a>
-  <a href="https://github.com/abutalebco/notimetowaste/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/abutalebco/notimetowaste?style=flat-square" alt="License" />
+  <a href="https://github.com/abutalebco/Sabha/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/abutalebco/Sabha?style=flat-square" alt="License" />
   </a>
 </p>
 
@@ -53,18 +53,18 @@ Make every build, test run and code review count.
 
 | Setting | Default | Description |
 |---|---|---|
-| `notimetowaste.shortcut` | `ctrl+alt+t` | Shortcut preset for **Count (+1)**, or `custom`. |
-| `notimetowaste.language` | `arabic` | `arabic`, `arabic-transliteration`, `arabic-english` or `english` (transliteration and meaning). |
-| `notimetowaste.dailyGoal` | `0` | `0` = automatic (your daily average); any other number = a fixed goal. |
-| `notimetowaste.showStatusBar` | `true` | Show the status bar counter. |
-| `notimetowaste.notifications` | `true` | VS Code pop-ups for level-ups and daily goal. |
+| `Sabha.shortcut` | `ctrl+alt+t` | Shortcut preset for **Count (+1)**, or `custom`. |
+| `Sabha.language` | `arabic` | `arabic`, `arabic-transliteration`, `arabic-english` or `english` (transliteration and meaning). |
+| `Sabha.dailyGoal` | `0` | `0` = automatic (your daily average); any other number = a fixed goal. |
+| `Sabha.showStatusBar` | `true` | Show the status bar counter. |
+| `Sabha.notifications` | `true` | VS Code pop-ups for level-ups and daily goal. |
 
 ## Commands
 
-- `No Time To Waste: Count (+1)`
-- `No Time To Waste: Reset Round` (resets only the current round; your totals are never lost)
-- `No Time To Waste: Customize Count Shortcut`
-- `No Time To Waste: Open Settings`
+- `Sabha: Count (+1)`
+- `Sabha: Reset Round` (resets only the current round; your totals are never lost)
+- `Sabha: Customize Count Shortcut`
+- `Sabha: Open Settings`
 
 ## Privacy
 
