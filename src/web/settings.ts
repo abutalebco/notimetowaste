@@ -5,7 +5,7 @@ import { Zikr } from './zikr';
 export type Language = 'arabic' | 'arabic-transliteration' | 'arabic-english' | 'english';
 
 function cfg() {
-	return vscode.workspace.getConfiguration('notimetowaste');
+	return vscode.workspace.getConfiguration('Sabha');
 }
 
 export const settings = {
