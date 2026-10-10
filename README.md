@@ -5,18 +5,11 @@
 <h1 align="center">Sabha 📿</h1>
 
 <p align="center">
-  <a href="https://github.com/abutalebco/Sabha/releases">
     <img src="https://img.shields.io/github/v/release/abutalebco/Sabha?style=flat-square" alt="GitHub Release" />
-  </a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=abutalebco.Sabha">
-    <img src="https://img.shields.io/visual-studio-marketplace/v/abutalebco.Sabha?style=flat-square" alt="Visual Studio Marketplace Version" />
-  </a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=abutalebco.Sabha">
-    <img src="https://img.shields.io/visual-studio-marketplace/i/abutalebco.Sabha?style=flat-square" alt="Visual Studio Marketplace Installs" />
-  </a>
-  <a href="https://github.com/abutalebco/Sabha/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/abutalebco/Sabha?style=flat-square" alt="License" />
-  </a>
+<img alt="GitHub License" src="https://img.shields.io/github/license/abutalebco/Sabha">
+  <img alt="GitHub Downloads (all assets, latest release)" src="https://img.shields.io/github/downloads/abutalebco/Sabha/latest/total">
+  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/abutalebco/Sabha">
+  <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/abutalebco/Sabha/publish.yml?logo=github">
 </p>
 
 A gamified **tasbih / tally counter** for your adhkar, right inside VS Code.
@@ -80,3 +73,9 @@ npm test                # unit tests in the web extension host
 ```
 
 Press `F5` to launch an Extension Development Host.
+
+<br><br>
+
+<p align="center">
+  <img src="public/images/seen-letter-white.png" style="width: 100px;">
+</p>
