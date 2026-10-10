@@ -1,6 +1,6 @@
 {
   "name": "NoTimeToWasteVS",
-  "displayName": "NoTimeToWasteVS",
+  "displayName": "NoTimeToWaste",
   "icon": "public/images/logo.png",
   "description": "A gamified tasbih / tally counter for your adhkar, right inside VS Code.",
   "publisher": "abutalebco",
@@ -32,7 +32,7 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "notimetowaste",
+          "id": "NoTimeToWaste",
           "title": "NoTimeToWaste",
           "icon": "public/images/seen-letter-white.png"
         }
@@ -42,31 +42,31 @@
       "notimetowaste": [
         {
           "type": "webview",
-          "id": "notimetowaste.counter",
+          "id": "NoTimeToWaste.counter",
           "name": "Tasbih"
         }
       ]
     },
     "commands": [
       {
-        "command": "notimetowaste.increment",
+        "command": "NoTimeToWaste.increment",
         "title": "Count (+1)",
         "category": "NoTimeToWaste"
       },
       {
-        "command": "notimetowaste.reset",
+        "command": "NoTimeToWaste.reset",
         "title": "Reset Round",
         "category": "NoTimeToWaste",
         "icon": "$(debug-restart)"
       },
       {
-        "command": "notimetowaste.configureShortcut",
+        "command": "NoTimeToWaste.configureShortcut",
         "title": "Customize Count Shortcut",
         "category": "NoTimeToWaste",
         "icon": "$(keyboard)"
       },
       {
-        "command": "notimetowaste.openSettings",
+        "command": "NoTimeToWaste.openSettings",
         "title": "Open Settings",
         "category": "NoTimeToWaste",
         "icon": "$(gear)"
@@ -75,57 +75,57 @@
     "menus": {
       "view/title": [
         {
-          "command": "notimetowaste.reset",
-          "when": "view == notimetowaste.counter",
+          "command": "NoTimeToWaste.reset",
+          "when": "view == NoTimeToWaste.counter",
           "group": "navigation"
         },
         {
-          "command": "notimetowaste.openSettings",
-          "when": "view == notimetowaste.counter",
+          "command": "NoTimeToWaste.openSettings",
+          "when": "view == NoTimeToWaste.counter",
           "group": "navigation"
         },
         {
-          "command": "notimetowaste.configureShortcut",
-          "when": "view == notimetowaste.counter",
+          "command": "NoTimeToWaste.configureShortcut",
+          "when": "view == NoTimeToWaste.counter",
           "group": "settings"
         }
       ]
     },
     "keybindings": [
       {
-        "command": "notimetowaste.increment",
+        "command": "NoTimeToWaste.increment",
         "key": "ctrl+alt+t",
         "mac": "cmd+alt+t",
-        "when": "config.notimetowaste.shortcut == 'ctrl+alt+t'"
+        "when": "config.NoTimeToWaste.shortcut == 'ctrl+alt+t'"
       },
       {
-        "command": "notimetowaste.increment",
+        "command": "NoTimeToWaste.increment",
         "key": "ctrl+alt+z",
         "mac": "cmd+alt+z",
-        "when": "config.notimetowaste.shortcut == 'ctrl+alt+z'"
+        "when": "config.NoTimeToWaste.shortcut == 'ctrl+alt+z'"
       },
       {
-        "command": "notimetowaste.increment",
+        "command": "NoTimeToWaste.increment",
         "key": "ctrl+alt+space",
         "mac": "cmd+alt+space",
-        "when": "config.notimetowaste.shortcut == 'ctrl+alt+space'"
+        "when": "config.NoTimeToWaste.shortcut == 'ctrl+alt+space'"
       },
       {
-        "command": "notimetowaste.increment",
+        "command": "NoTimeToWaste.increment",
         "key": "ctrl+shift+alt+t",
         "mac": "cmd+shift+alt+t",
-        "when": "config.notimetowaste.shortcut == 'ctrl+shift+alt+t'"
+        "when": "config.NoTimeToWaste.shortcut == 'ctrl+shift+alt+t'"
       },
       {
-        "command": "notimetowaste.increment",
+        "command": "NoTimeToWaste.increment",
         "key": "alt+=",
-        "when": "config.notimetowaste.shortcut == 'alt+='"
+        "when": "config.NoTimeToWaste.shortcut == 'alt+='"
       }
     ],
     "configuration": {
       "title": "NoTimeToWaste",
       "properties": {
-        "notimetowaste.shortcut": {
+        "NoTimeToWaste.shortcut": {
           "type": "string",
           "default": "ctrl+alt+t",
           "enum": [
@@ -146,7 +146,7 @@
           ],
           "markdownDescription": "Keyboard shortcut that counts **+1**. Pick a preset, or choose *Custom* and assign any key in [Keyboard Shortcuts](command:notimetowaste.configureShortcut)."
         },
-        "notimetowaste.language": {
+        "NoTimeToWaste.language": {
           "type": "string",
           "default": "arabic",
           "enum": [
@@ -163,18 +163,18 @@
           ],
           "markdownDescription": "How adhkar are displayed in the dropdown, sidebar and status bar. Default is Arabic only."
         },
-        "notimetowaste.dailyGoal": {
+        "NoTimeToWaste.dailyGoal": {
           "type": "integer",
           "default": 0,
           "minimum": 0,
           "markdownDescription": "Daily goal for the **Today** progress bar. `0` = automatic: your own daily average (starts at 100 until there is history)."
         },
-        "notimetowaste.showStatusBar": {
+        "NoTimeToWaste.showStatusBar": {
           "type": "boolean",
           "default": true,
           "description": "Show the tasbih counter in the status bar."
         },
-        "notimetowaste.notifications": {
+        "NoTimeToWaste.notifications": {
           "type": "boolean",
           "default": true,
           "description": "Show VS Code notifications for level-ups and reaching the daily goal (the sidebar always celebrates)."
