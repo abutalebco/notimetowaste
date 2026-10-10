@@ -8,15 +8,15 @@ const MAX_LABEL = 28;
 
 /** Live counter in the status bar; clicking it counts once. */
 export class StatusBar implements vscode.Disposable {
-	private readonly item = vscode.window.createStatusBarItem('notimetowaste.status', vscode.StatusBarAlignment.Right, 100);
+	private readonly item = vscode.window.createStatusBarItem('Sabha.status', vscode.StatusBarAlignment.Right, 100);
 	private readonly configListener: vscode.Disposable;
 
 	constructor(private readonly store: Store) {
-		this.item.name = 'No Time To Waste';
-		this.item.command = 'notimetowaste.increment';
+		this.item.name = 'Sabha';
+		this.item.command = 'Sabha.increment';
 		store.onDidChange(() => this.update());
 		this.configListener = vscode.workspace.onDidChangeConfiguration(e => {
-			if (e.affectsConfiguration('notimetowaste')) {
+			if (e.affectsConfiguration('Sabha')) {
 				this.update();
 			}
 		});
@@ -37,7 +37,7 @@ export class StatusBar implements vscode.Disposable {
 		this.item.text = `${lvl.badge} ${short}  ${round}/${zikr.target}`;
 
 		const md = new vscode.MarkdownString();
-		md.appendMarkdown(`**No Time To Waste**\n\n`);
+		md.appendMarkdown(`**Sabha**\n\n`);
 		md.appendMarkdown(`${lvl.badge} Overall: Level ${lvl.number} — ${lvl.name}  \n`);
 		md.appendMarkdown(`${sLvl.badge} This session: Level ${sLvl.number} — ${sLvl.name}\n\n`);
 		md.appendMarkdown(`Today: **${this.store.today.toLocaleString()}** / ${currentDailyGoal(this.store.global.daily).toLocaleString()}  \n`);
