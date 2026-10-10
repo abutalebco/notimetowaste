@@ -1,6 +1,6 @@
 {
-  "name": "NoTimeToWaste",
-  "displayName": "NoTimeToWaste",
+  "name": "NoTimeToWasteVS",
+  "displayName": "NoTimeToWasteVS",
   "icon": "public/images/logo.png",
   "description": "A gamified tasbih / tally counter for your adhkar, right inside VS Code.",
   "publisher": "abutalebco",
