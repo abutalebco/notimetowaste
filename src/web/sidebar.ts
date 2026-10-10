@@ -61,12 +61,12 @@ type InboundMessage =
 	| { type: 'select'; id: string };
 
 export class SidebarProvider implements vscode.WebviewViewProvider {
-	static readonly viewId = 'notimetowaste.counter';
+	static readonly viewId = 'Sabha.counter';
 	private view?: vscode.WebviewView;
 
 	constructor(private readonly extensionUri: vscode.Uri, private readonly store: Store) {
 		store.onDidChange(() => this.refresh());
-		vscode.workspace.onDidChangeConfiguration(e => e.affectsConfiguration('notimetowaste') && this.refresh());
+		vscode.workspace.onDidChangeConfiguration(e => e.affectsConfiguration('Sabha') && this.refresh());
 	}
 
 	resolveWebviewView(view: vscode.WebviewView): void {
@@ -77,8 +77,8 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 		view.webview.onDidReceiveMessage((msg: InboundMessage) => {
 			switch (msg.type) {
 				case 'ready': return this.refresh();
-				case 'increment': return vscode.commands.executeCommand('notimetowaste.increment');
-				case 'reset': return vscode.commands.executeCommand('notimetowaste.reset');
+				case 'increment': return vscode.commands.executeCommand('Sabha.increment');
+				case 'reset': return vscode.commands.executeCommand('Sabha.reset');
 				case 'select': return this.store.select(msg.id);
 			}
 		});
